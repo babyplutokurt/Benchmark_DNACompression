@@ -1,0 +1,26 @@
+{
+  "compressor": "fqzcomp",
+  "job_type": "Compression-Decompression",
+  "job_name": "fqzcomp_Q_0_s_3+",
+  "Process1": "Compression",
+  "Compression": {
+    "Q": 0,
+    "s": "3+",
+    "b": true,
+    "e": true,
+    "q": 2,
+    "n": 2,
+    "P": false,
+    "X": false,
+    "S": false,
+    "I": false,
+    "input_file": "/Users/kurtyang/PycharmProjects/Benchmark_DNA/Fastq/ERR103405_2.fastq",
+    "output_file": "/Users/kurtyang/PycharmProjects/Benchmark_DNA/CompressedOutput/ERR103405_2_fqzcomp.fqz"
+  },
+
+  "Process2": "Decompression",
+  "Decompression": {
+    "input_file": "/Users/kurtyang/PycharmProjects/Benchmark_DNA/CompressedOutput/ERR103405_2_fqzcomp.fqz",
+    "output_file": "/Users/kurtyang/PycharmProjects/Benchmark_DNA/DecompressedOutput/ERR103405_2_decompressed.fastq"
+    }
+}
