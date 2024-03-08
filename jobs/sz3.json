@@ -1,0 +1,39 @@
+{
+  "compressor": "sz3",
+  "job_type": "Compression-Decompression",
+  "job_name": "SZ_ABS_0.1_2_152_420175",
+  "general": {
+    "help": false,
+    "SZ2_style_command_line": false,
+    "Version": false,
+    "print_compression_results": true
+  },
+  "input_output": {
+    "input_file": "/home/tus53997/Benchmark_DNACompression/binFile/ERR103405_2_F.bin",
+    "output_file": "/home/tus53997/Benchmark_DNACompression/binFile/ERR103405_2_F.bin.sz",
+    "compressed_file": "",
+    "output_format": false
+  },
+  "data_type": {
+    "type": "float",
+    "integer_width": 32
+  },
+  "configuration_file": {
+    "use_configuration": false,
+    "file_path": ""
+  },
+  "error_control": {
+    "mode": "ABS",
+    "absolute_error_bound": 0.1,
+    "relative_error_bound": 0,
+    "PSNR": 0,
+    "normErr": 0
+  },
+  "dimensions": {
+    "dimensionality": 2,
+    "nx": 152,
+    "ny": 420175,
+    "nz": 0,
+    "np": 0
+  }
+}

@@ -154,9 +154,12 @@ class FQZCompCommandGenerator(CommandGenerator):
         options = self.config.get('options_compression', {})
 
         # Example for handling a few options
-        if quality := options.get('Q'):
+        quality = options.get('Q')
+        if quality:
             self.command.extend(["-Q", str(quality)])
-        if sequence_level := options.get('s'):
+
+        sequence_level = options.get('s')
+        if sequence_level:
             self.command.extend(["-s", str(sequence_level)])
         if options.get('b', False):
             self.command.append("-b")
