@@ -1,0 +1,40 @@
+----------------------------------------
+Begin Batch Job Prologue Thu Mar 21 17:38:06 EDT 2024
+Job ID:           69427
+Username:         tus53997
+Group:            cis
+Job Name:         job_1_0
+Resources List:   walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
+Queue:            compute
+Account:          
+Nodes:            c08 
+----------------------------------------
+End Batch Job Prologue Thu Mar 21 17:38:06 EDT 2024
+----------------------------------------
+compression ratio = 35.41 
+compression time = 4.958165
+compressed data file = /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin.sz.tmp
+Min=0.048780485987663269043, Max=1, range=0.95121951401233673096
+Max absolute error = 0.098
+Max relative error = 0.1
+Max pw relative error = 1
+PSNR = 25.494025, NRMSE= 0.05312497848
+normError = 403.846587, normErr_norm = 0.058864
+acEff=0.976059
+compression ratio = 35.407978
+decompression time = 1.065853 seconds.
+decompressed file = /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin_-a_-f_-M_ABS_0.1_-1_63866600.sz
+----------------------------------------
+Begin Batch Job Epilogue Thu Mar 21 17:38:15 EDT 2024
+Job ID:           69427
+Username:         tus53997
+Group:            cis
+Job Name:         job_1_0
+Session:          113964
+Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
+Resources:        cput=00:00:07,vmem=1934736kb,walltime=00:00:09,mem=988000kb,energy_used=0
+Queue:            compute
+Account:          
+----------------------------------------
+End Batch Job Epilogue Thu Mar 21 17:38:25 EDT 2024
+----------------------------------------
