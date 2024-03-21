@@ -97,9 +97,7 @@ if __name__ == "__main__":
     bench_file_path = '/home/tus53997/Benchmark_DNACompression/jobs/Cbench.json'
     metrics_df = metric_analysis(bench_file_path)
     compression_df = pd.read_csv('../logs/compression_metrics.csv')
-    print(metrics_df)
-    print(compression_df)
     merged_df = pd.merge(metrics_df, compression_df, left_on="Job Name", right_on="Compressor Name")
     merged_df.drop(columns=['Compressor Name'], inplace=True)
-
+    print(metrics_df)
     merged_df.to_csv('/home/tus53997/Benchmark_DNACompression/Analysis/metric.csv')
