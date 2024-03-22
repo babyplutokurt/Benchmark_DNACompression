@@ -1,8 +1,7 @@
+import subprocess
 import os
-
 import pandas as pd
 import json
-import numpy as np
 from QualityConverter import QualityConverter  # Assuming the class you've shared is saved as QualityConverter.py
 
 
@@ -50,7 +49,8 @@ def get_decompressed_output_path(project_root, job, input_file, binary_input_fil
         raise ValueError(f"Unknown job type: {job['name']}")
     # decompressed_output_path = os.path.join(project_root, 'DecompressedOutput', output_file_name)
     print("Compressor: ", job['name'])
-    print("output_path: ", output_path if output_path else "This job will be skipped in analysis, because it's not a Compression-Decompression workflow")
+    print("output_path: ",
+          output_path if output_path else "This job will be skipped in analysis, because it's not a Compression-Decompression workflow")
     return output_path
 
 
@@ -92,11 +92,10 @@ def metric_analysis(bench_file_path):
     return metrics_df
 
 
-
 if __name__ == "__main__":
     bench_file_path = '/home/tus53997/Benchmark_DNACompression/jobs/Cbench.json'
     metrics_df = metric_analysis(bench_file_path)
-    compression_df = pd.read_csv('../logs/compression_metrics.csv')
+    compression_df = pd.read_csv('/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv')
     merged_df = pd.merge(metrics_df, compression_df, left_on="Job Name", right_on="Compressor Name")
     merged_df.drop(columns=['Compressor Name'], inplace=True)
     print(metrics_df)

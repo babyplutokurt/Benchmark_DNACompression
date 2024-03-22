@@ -1,0 +1,62 @@
+----------------------------------------
+Begin Batch Job Prologue Thu Mar 21 19:08:08 EDT 2024
+Job ID:           69442
+Username:         tus53997
+Group:            cis
+Job Name:         analysis_job
+Resources List:   walltime=01:00:00,neednodes=1:ppn=1,nodes=1:ppn=1
+Queue:            compute
+Account:          
+Nodes:            c08 
+----------------------------------------
+End Batch Job Prologue Thu Mar 21 19:08:08 EDT 2024
+----------------------------------------
+/home/tus53997/Benchmark_DNACompression/Analysis/Metric_analysis.py:91: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  metrics_df = pd.concat([metrics_df, temp_df], ignore_index=True)
+/home/tus53997/Benchmark_DNACompression/Analysis/../Fastq/ERR103405_2.fastq
+Compressor:  SZ3
+output_path:  This job will be skipped in analysis, because it's not a Compression-Decompression workflow
+Compressor:  SZ3
+output_path:  This job will be skipped in analysis, because it's not a Compression-Decompression workflow
+Compressor:  fqzcomp
+output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-Q_5_decompressed.fastq
+/home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-Q_5_decompressed.fastq
+Quality Score PSNR: 21.22167673179685
+Quality Score MSE: 12.688200718372357
+Probability PSNR: 26.608032698076983
+Probability MSE: 0.0008693541471083061
+Compressor:  spring
+output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.6_decompressed.fastq
+/home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.6_decompressed.fastq
+Quality Score PSNR: 16.94897052623586
+Quality Score MSE: 33.936782167831076
+Probability PSNR: 14.790816354303134
+Probability MSE: 0.013210472902517275
+Compressor:  SZ3
+output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1_decompressed.sz.out
+Exceed 42 count:  0
+/home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1_decompressed.sz.out
+Quality Score PSNR: 26.160574238254345
+Quality Score MSE: 4.069211747611428
+Probability PSNR: 40.39999859453875
+Probability MSE: 3.63078172269227e-05
+                       Job Name  ...  Probability MSE
+0                   fqzcomp-Q 5  ...         0.000869
+1        spring-c -l -q qvz 0.6  ...         0.013210
+2  SZ3-f -1 63866600 -M REL 0.1  ...         0.000036
+
+[3 rows x 5 columns]
+----------------------------------------
+Begin Batch Job Epilogue Thu Mar 21 19:12:18 EDT 2024
+Job ID:           69442
+Username:         tus53997
+Group:            cis
+Job Name:         analysis_job
+Session:          116847
+Limits:           walltime=01:00:00,neednodes=1:ppn=1,nodes=1:ppn=1
+Resources:        cput=00:04:08,vmem=5304984kb,walltime=00:04:10,mem=4861532kb,energy_used=0
+Queue:            compute
+Account:          
+----------------------------------------
+End Batch Job Epilogue Thu Mar 21 19:12:28 EDT 2024
+----------------------------------------
