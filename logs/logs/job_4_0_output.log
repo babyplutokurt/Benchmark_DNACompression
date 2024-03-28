@@ -1,6 +1,6 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Mar 21 17:38:07 EDT 2024
-Job ID:           69432
+Begin Batch Job Prologue Thu Mar 28 15:27:04 EDT 2024
+Job ID:           69648
 Username:         tus53997
 Group:            cis
 Job Name:         job_4_0
@@ -9,22 +9,39 @@ Queue:            compute
 Account:          
 Nodes:            c08 
 ----------------------------------------
-End Batch Job Prologue Thu Mar 21 17:38:07 EDT 2024
+End Batch Job Prologue Thu Mar 28 15:27:04 EDT 2024
 ----------------------------------------
-compression ratio = 32.56 
-compression time = 4.808651
-compressed data file = /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1.sz
+Temporary directory: ./tmp.hMaiRrV41m/
+Long flag detected.
+Starting compression...
+Preprocessing ...
+Max Read length: 152
+Total number of reads: 420175
+Preprocessing done!
+Time for this step: 228 s
+Temporary directory size: 24693544
+
+Sizes of streams after compression: 
+Reads:          14724888 bytes
+Quality:         9095680 bytes
+ID:               872976 bytes
+Creating tar archive ...Tar archive done!
+Time for this step: 0 s
+Compression done!
+Total time for compression: 228 s
+
+Total size:     24842240 bytes
 ----------------------------------------
-Begin Batch Job Epilogue Thu Mar 21 17:38:13 EDT 2024
-Job ID:           69432
+Begin Batch Job Epilogue Thu Mar 28 15:30:54 EDT 2024
+Job ID:           69648
 Username:         tus53997
 Group:            cis
 Job Name:         job_4_0
-Session:          114233
+Session:          192946
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:00:05,vmem=1538916kb,walltime=00:00:06,mem=523916kb,energy_used=0
+Resources:        cput=00:26:15,vmem=2683888kb,walltime=00:03:50,mem=1515328kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Mar 21 17:38:23 EDT 2024
+End Batch Job Epilogue Thu Mar 28 15:31:04 EDT 2024
 ----------------------------------------

@@ -7,7 +7,7 @@ file_path = '/home/tus53997/Benchmark_DNACompression/Analysis/metric.csv'  # Adj
 
 # Plotting function
 def plot_scatter(x, y, labels, xlabel, ylabel, title):
-    plt.figure(figsize=(5, 5))  # Set the figure size
+    plt.figure(figsize=(20, 20))  # Set the figure size
 
     # Create a scatter plot for each point and annotate it with its label
     for xi, yi, label in zip(x, y, labels):

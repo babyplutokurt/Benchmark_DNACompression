@@ -3,9 +3,11 @@ import subprocess
 import psutil
 import json
 from Command_generator import CommandGeneratorWrapper
+import csv
 
 
-def generate_and_submit_job(job_name, commands, input_path, output_path, job_identifier, singularity_image="/home/tus53997/sz3_perf_amd.sif",
+def generate_and_submit_job(job_name, commands, input_path, output_path, job_identifier,
+                            singularity_image="/home/tus53997/sz3_perf_amd.sif",
                             output_dir="/home/tus53997/Benchmark_DNACompression/logs/Job_scripts", dependency=""):
     os.makedirs(output_dir, exist_ok=True)
     log_path = "/home/tus53997/Benchmark_DNACompression/logs/logs"  # Directory to store logs
@@ -13,8 +15,8 @@ def generate_and_submit_job(job_name, commands, input_path, output_path, job_ide
     os.makedirs(log_path, exist_ok=True)  # Ensure log directory exists
 
     # Check if metrics CSV file exists; if not, create it and add headers
-    with open(metrics_file_path, 'w') as metrics_file:
-        metrics_file.write("Compressor Name,Time (seconds),Ratio\n")
+    # with open(metrics_file_path, 'w') as metrics_file:
+    #   metrics_file.write("Compressor Name,Time (seconds),Ratio\n")
 
     for i, command in enumerate(commands):
         individual_job_name = f"{job_name}_{i}"
@@ -33,7 +35,7 @@ INPUT_SIZE=$(stat -c %s "{input_path}")
 OUTPUT_SIZE=$(stat -c %s "{output_path}")
 RATIO=$(echo "scale=2;  $INPUT_SIZE/$OUTPUT_SIZE" | bc)
 
-echo "{job_identifier},$DURATION,$RATIO" >> "{metrics_file_path}"
+echo "{individual_job_name}, {job_identifier},$DURATION,$RATIO" >> "{metrics_file_path}"
 """
             command_script = compression_perf_script
         else:
@@ -86,4 +88,9 @@ def main():
 
 
 if __name__ == "__main__":
+    filename = '/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv'
+    header = ['job_id', 'Compressor Name', 'Time (seconds)', 'Ratio']
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
     main()

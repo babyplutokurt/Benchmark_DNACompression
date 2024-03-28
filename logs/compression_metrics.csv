@@ -1,6 +1,2 @@
-Compressor Name,Time (seconds),Ratio
-SZ3-a -f -M ABS 0.1 -2 152 420175,8,1.00
-fqzcomp-Q 5,4,9.43
-SZ3-f -1 63866600 -M REL 0.1,5,32.55
-SZ3-a -f -M ABS 0.1 -1 63866600,8,1.00
-spring-c -l -q qvz 0.6,217,8.64
+job_id,Compressor Name,Time (seconds),Ratio
+job_0_0, SZ3-f -1 63866600 -M ABS 0.1,4,35.40

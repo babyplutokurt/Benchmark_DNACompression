@@ -1,6 +1,6 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Mar 21 17:37:55 EDT 2024
-Job ID:           69426
+Begin Batch Job Prologue Thu Mar 28 15:26:43 EDT 2024
+Job ID:           69640
 Username:         tus53997
 Group:            cis
 Job Name:         job_0_0
@@ -9,32 +9,22 @@ Queue:            compute
 Account:          
 Nodes:            c08 
 ----------------------------------------
-End Batch Job Prologue Thu Mar 21 17:37:55 EDT 2024
+End Batch Job Prologue Thu Mar 28 15:26:43 EDT 2024
 ----------------------------------------
-compression ratio = 22.59 
-compression time = 4.134441
-compressed data file = /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin.sz.tmp
-Min=0.048780485987663269043, Max=1, range=0.95121951401233673096
-Max absolute error = 0.1
-Max relative error = 0.11
-Max pw relative error = 1.8
-PSNR = 24.619037, NRMSE= 0.05875544671
-normError = 446.648399, normErr_norm = 0.065797
-acEff=0.965179
-compression ratio = 22.591870
-decompression time = 2.393931 seconds.
-decompressed file = /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin_-a_-f_-M_ABS_0.1_-2_152_420175.sz
+compression ratio = 35.41 
+compression time = 3.939606
+compressed data file = /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_ABS_0.1.sz
 ----------------------------------------
-Begin Batch Job Epilogue Thu Mar 21 17:38:04 EDT 2024
-Job ID:           69426
+Begin Batch Job Epilogue Thu Mar 28 15:26:49 EDT 2024
+Job ID:           69640
 Username:         tus53997
 Group:            cis
 Job Name:         job_0_0
-Session:          113827
+Session:          192278
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:00:08,vmem=0kb,walltime=00:00:09,mem=0kb,energy_used=0
+Resources:        cput=00:00:04,vmem=0kb,walltime=00:00:06,mem=0kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Mar 21 17:38:14 EDT 2024
+End Batch Job Epilogue Thu Mar 28 15:26:59 EDT 2024
 ----------------------------------------
