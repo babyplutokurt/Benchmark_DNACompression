@@ -1,0 +1,14 @@
+{
+    "base_identifiers.fastq": {
+        "original_size": 22067143,
+        "compressed_size": 3465829
+    },
+    "dna_bases.fastq": {
+        "original_size": 64286775,
+        "compressed_size": 14124985
+    },
+    "quality_identifiers.fastq": {
+        "original_size": 22067143,
+        "compressed_size": 3465830
+    }
+}

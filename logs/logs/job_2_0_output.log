@@ -1,6 +1,6 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Mar 28 15:26:54 EDT 2024
-Job ID:           69644
+Begin Batch Job Prologue Thu Apr  4 18:26:20 EDT 2024
+Job ID:           69837
 Username:         tus53997
 Group:            cis
 Job Name:         job_2_0
@@ -9,7 +9,7 @@ Queue:            compute
 Account:          
 Nodes:            c08 
 ----------------------------------------
-End Batch Job Prologue Thu Mar 28 15:26:54 EDT 2024
+End Batch Job Prologue Thu Apr  4 18:26:20 EDT 2024
 ----------------------------------------
 Temporary directory: ./tmp.yDsbzayy4c/
 Long flag detected.
@@ -18,30 +18,30 @@ Preprocessing ...
 Max Read length: 152
 Total number of reads: 420175
 Preprocessing done!
-Time for this step: 218 s
-Temporary directory size: 19828020
+Time for this step: 354 s
+Temporary directory size: 19584132
 
 Sizes of streams after compression: 
 Reads:          14724888 bytes
-Quality:         4230156 bytes
+Quality:         3986268 bytes
 ID:               872976 bytes
 Creating tar archive ...Tar archive done!
 Time for this step: 0 s
 Compression done!
-Total time for compression: 218 s
+Total time for compression: 354 s
 
-Total size:     19978240 bytes
+Total size:     19732480 bytes
 ----------------------------------------
-Begin Batch Job Epilogue Thu Mar 28 15:30:34 EDT 2024
-Job ID:           69644
+Begin Batch Job Epilogue Thu Apr  4 18:32:16 EDT 2024
+Job ID:           69837
 Username:         tus53997
 Group:            cis
 Job Name:         job_2_0
-Session:          192508
+Session:          35927
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:25:17,vmem=2516888kb,walltime=00:03:40,mem=1430060kb,energy_used=0
+Resources:        cput=00:25:40,vmem=2541012kb,walltime=00:05:56,mem=1502280kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Mar 28 15:30:44 EDT 2024
+End Batch Job Epilogue Thu Apr  4 18:32:26 EDT 2024
 ----------------------------------------

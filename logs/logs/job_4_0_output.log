@@ -1,47 +1,47 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Mar 28 15:27:04 EDT 2024
-Job ID:           69648
+Begin Batch Job Prologue Thu Apr  4 18:26:31 EDT 2024
+Job ID:           69841
 Username:         tus53997
 Group:            cis
 Job Name:         job_4_0
 Resources List:   walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
 Queue:            compute
 Account:          
-Nodes:            c08 
+Nodes:            c06 
 ----------------------------------------
-End Batch Job Prologue Thu Mar 28 15:27:04 EDT 2024
+End Batch Job Prologue Thu Apr  4 18:26:32 EDT 2024
 ----------------------------------------
-Temporary directory: ./tmp.hMaiRrV41m/
+Temporary directory: ./tmp.BWDxS22Jjz/
 Long flag detected.
 Starting compression...
 Preprocessing ...
 Max Read length: 152
 Total number of reads: 420175
 Preprocessing done!
-Time for this step: 228 s
-Temporary directory size: 24693544
+Time for this step: 238 s
+Temporary directory size: 24693814
 
 Sizes of streams after compression: 
 Reads:          14724888 bytes
-Quality:         9095680 bytes
+Quality:         9095950 bytes
 ID:               872976 bytes
 Creating tar archive ...Tar archive done!
 Time for this step: 0 s
 Compression done!
-Total time for compression: 228 s
+Total time for compression: 239 s
 
 Total size:     24842240 bytes
 ----------------------------------------
-Begin Batch Job Epilogue Thu Mar 28 15:30:54 EDT 2024
-Job ID:           69648
+Begin Batch Job Epilogue Thu Apr  4 18:30:32 EDT 2024
+Job ID:           69841
 Username:         tus53997
 Group:            cis
 Job Name:         job_4_0
-Session:          192946
+Session:          6502
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:26:15,vmem=2683888kb,walltime=00:03:50,mem=1515328kb,energy_used=0
+Resources:        cput=00:25:01,vmem=2672352kb,walltime=00:04:01,mem=1497404kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Mar 28 15:31:04 EDT 2024
+End Batch Job Epilogue Thu Apr  4 18:30:42 EDT 2024
 ----------------------------------------

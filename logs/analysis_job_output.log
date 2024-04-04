@@ -1,18 +1,21 @@
 ----------------------------------------
-Begin Batch Job Prologue Wed Mar 27 02:16:00 EDT 2024
-Job ID:           69615
+Begin Batch Job Prologue Thu Apr  4 18:37:25 EDT 2024
+Job ID:           69851
 Username:         tus53997
 Group:            cis
 Job Name:         analysis_job
 Resources List:   walltime=01:00:00,neednodes=1:ppn=1,nodes=1:ppn=1
 Queue:            compute
 Account:          
-Nodes:            c07 
+Nodes:            c08 
 ----------------------------------------
-End Batch Job Prologue Wed Mar 27 02:16:00 EDT 2024
+End Batch Job Prologue Thu Apr  4 18:37:25 EDT 2024
 ----------------------------------------
-/home/tus53997/Benchmark_DNACompression/Analysis/Metric_analysis.py:91: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+/home/tus53997/Benchmark_DNACompression/Analysis/Metric_analysis.py:92: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
   metrics_df = pd.concat([metrics_df, temp_df], ignore_index=True)
+Total identifier bytes: 21646968
+Total DNA bases bytes: 63866600
+Total quality score bytes: 63866600
 /home/tus53997/Benchmark_DNACompression/Analysis/../Fastq/ERR103405_2.fastq
 Compressor:  SZ3
 output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_ABS_0.1_decompressed.sz.out
@@ -32,24 +35,24 @@ Probability MSE: 0.0008693541471083061
 Compressor:  spring
 output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.6_decompressed.fastq
 /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.6_decompressed.fastq
-Quality Score PSNR: 16.948392443654722
-Quality Score MSE: 33.94129974039639
-Probability PSNR: 14.789756584881097
-Probability MSE: 0.013213696927714081
+Quality Score PSNR: 16.841961182254735
+Quality Score MSE: 34.78336509223914
+Probability PSNR: 14.677015182733328
+Probability MSE: 0.01356121126490901
 Compressor:  spring
 output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.8_decompressed.fastq
 /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_0.8_decompressed.fastq
-Quality Score PSNR: 19.54659353431817
-Quality Score MSE: 18.659859096930163
-Probability PSNR: 15.238817650332201
-Probability MSE: 0.011915663631350338
+Quality Score PSNR: 19.705685370930052
+Quality Score MSE: 17.988675035151395
+Probability PSNR: 15.420844964862612
+Probability MSE: 0.011426559976110194
 Compressor:  spring
 output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_1_decompressed.fastq
 /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_qvz_1_decompressed.fastq
-Quality Score PSNR: 25.45212720306423
-Quality Score MSE: 4.790214854086487
-Probability PSNR: 23.812058726436028
-Probability MSE: 0.0016549852494751672
+Quality Score PSNR: 25.472024018511988
+Quality Score MSE: 4.768319105761071
+Probability PSNR: 23.824429465751425
+Probability MSE: 0.001650277784676346
 Compressor:  spring
 output_path:  /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_ill_bin_decompressed.fastq
 /home/tus53997/Benchmark_DNACompression/Analysis/../DecompressedOutput/ERR103405_2.fastq_-c_-l_-q_ill_bin_decompressed.fastq
@@ -81,30 +84,31 @@ Quality Score PSNR: 23.837125317775282
 Quality Score MSE: 6.9479259581690584
 Probability PSNR: 23.57768919621998
 Probability MSE: 0.0017467513210462282
-                         Job Name  ...  Probability MSE
-0    SZ3-f -1 63866600 -M ABS 0.1  ...         0.000052
-1                     fqzcomp-Q 5  ...         0.000869
-2          spring-c -l -q qvz 0.6  ...         0.013214
-3          spring-c -l -q qvz 0.8  ...         0.011916
-4            spring-c -l -q qvz 1  ...         0.001655
-5          spring-c -l -q ill_bin  ...         0.006007
-6    SZ3-f -1 63866600 -M REL 0.1  ...         0.000036
-7  SZ3-f -2 152 420175 -M ABS 0.1  ...         0.001630
-8    SZ3-f -1 63866600 -M REL 0.2  ...         0.001747
-
-[9 rows x 5 columns]
-(9, 7)
+{'job_id': 'job_0_0', 'Base Compression Ratio': 4.551280939413387, 'Quality Score Compression Ratio': 8.8525, 'Identifier Compression ratio': 6.367060521451001}
+{'job_id': 'job_1_0', 'Base Compression Ratio': 0.206, 'Quality Score Compression Ratio': 0.067, 'Identifier Compression ratio': 0.04}
+{'job_id': 'job_5_0', 'Base Compression Ratio': 4.3373233127477775, 'Quality Score Compression Ratio': 6.787587883590337, 'Identifier Compression ratio': 24.796750426128554}
+{'job_id': 'job_7_0', 'Base Compression Ratio': 4.551280939413387, 'Quality Score Compression Ratio': 5.6475, 'Identifier Compression ratio': 6.367060521451001}
+{'job_id': 'job_8_0', 'Base Compression Ratio': 4.551280939413387, 'Quality Score Compression Ratio': 10.94, 'Identifier Compression ratio': 6.367060521451001}
+{'job_id': 'job_6_0', 'Base Compression Ratio': 4.551280939413387, 'Quality Score Compression Ratio': 8.14, 'Identifier Compression ratio': 6.367060521451001}
+{'job_id': 'job_4_0', 'Base Compression Ratio': 4.3373233127477775, 'Quality Score Compression Ratio': 7.021432615614642, 'Identifier Compression ratio': 24.796750426128554}
+{'job_id': 'job_2_0', 'Base Compression Ratio': 4.3373233127477775, 'Quality Score Compression Ratio': 16.021652332457325, 'Identifier Compression ratio': 24.796750426128554}
+{'job_id': 'job_3_0', 'Base Compression Ratio': 4.3373233127477775, 'Quality Score Compression Ratio': 9.183455728411763, 'Identifier Compression ratio': 24.796750426128554}
+CSV file has been written successfully.
+Compression:  (9, 4)
+Ratio:  (9, 4)
+Metric:  (9, 5)
+Merging Done
 ----------------------------------------
-Begin Batch Job Epilogue Wed Mar 27 02:29:35 EDT 2024
-Job ID:           69615
+Begin Batch Job Epilogue Thu Apr  4 18:53:30 EDT 2024
+Job ID:           69851
 Username:         tus53997
 Group:            cis
 Job Name:         analysis_job
-Session:          97358
+Session:          37359
 Limits:           walltime=01:00:00,neednodes=1:ppn=1,nodes=1:ppn=1
-Resources:        cput=00:13:30,vmem=5306828kb,walltime=00:13:35,mem=5024824kb,energy_used=0
+Resources:        cput=00:16:01,vmem=4621608kb,walltime=00:16:05,mem=4339888kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Wed Mar 27 02:29:45 EDT 2024
+End Batch Job Epilogue Thu Apr  4 18:53:40 EDT 2024
 ----------------------------------------

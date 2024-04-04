@@ -1,15 +1,15 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Mar 28 15:27:26 EDT 2024
-Job ID:           69651
+Begin Batch Job Prologue Thu Apr  4 18:26:52 EDT 2024
+Job ID:           69844
 Username:         tus53997
 Group:            cis
 Job Name:         job_5_1
 Resources List:   walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
 Queue:            compute
 Account:          
-Nodes:            c08 
+Nodes:            c06 
 ----------------------------------------
-End Batch Job Prologue Thu Mar 28 15:27:26 EDT 2024
+End Batch Job Prologue Thu Apr  4 18:26:52 EDT 2024
 ----------------------------------------
 Temporary directory: ./tmp.tzxlYvKWrO/
 Starting decompression...
@@ -19,16 +19,16 @@ Decompressing ...
 Decompression done!
 Total time for decompression: 3 s
 ----------------------------------------
-Begin Batch Job Epilogue Thu Mar 28 15:27:31 EDT 2024
-Job ID:           69651
+Begin Batch Job Epilogue Thu Apr  4 18:26:56 EDT 2024
+Job ID:           69844
 Username:         tus53997
 Group:            cis
 Job Name:         job_5_1
-Session:          193928
+Session:          7455
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:00:12,vmem=1540040kb,walltime=00:00:05,mem=186644kb,energy_used=0
+Resources:        cput=00:00:14,vmem=0kb,walltime=00:00:04,mem=0kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Mar 28 15:27:41 EDT 2024
+End Batch Job Epilogue Thu Apr  4 18:27:06 EDT 2024
 ----------------------------------------
