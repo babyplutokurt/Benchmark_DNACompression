@@ -39,7 +39,7 @@ def parse_sz3_log(log_file_path, log_error_path, _identifier_bytes=identifier_by
 
     metrics['Base Compression Ratio'] = size_metrics['dna_bases.fastq']['original_size'] / \
                                         size_metrics['dna_bases.fastq']['compressed_size']
-    metrics['Identifier Compression ratio'] = size_metrics['base_identifiers.fastq']['original_size'] / \
+    metrics['Identifier Compression ratio'] = size_metrics['base_identifiers.fastq']['original_size'] * 2 / \
                                               size_metrics['base_identifiers.fastq']['compressed_size']
 
     return metrics
@@ -71,15 +71,15 @@ def parse_fqzcomp_log(log_file_path, log_error_path, _identifier_bytes=identifie
             if names_match := names_pattern.search(line):
                 metrics['Names_original'] = int(names_match.group(1))
                 metrics['Names_compressed'] = int(names_match.group(2))
-                metrics['Identifier Compression ratio'] = float(names_match.group(3))
+                metrics['Identifier Compression ratio'] = metrics['Names_original']/metrics['Names_compressed']
             elif bases_match := bases_pattern.search(line):
                 metrics['Bases_original'] = int(bases_match.group(1))
                 metrics['Bases_compressed'] = int(bases_match.group(2))
-                metrics['Base Compression Ratio'] = float(bases_match.group(3))
+                metrics['Base Compression Ratio'] = metrics['Bases_original']/metrics['Bases_compressed']
             elif quals_match := quals_pattern.search(line):
                 metrics['Quals_original'] = int(quals_match.group(1))
                 metrics['Quals_compressed'] = int(quals_match.group(2))
-                metrics['Quality Score Compression Ratio'] = float(quals_match.group(3))
+                metrics['Quality Score Compression Ratio'] = metrics['Quals_original']/metrics['Quals_compressed']
 
     return metrics
 

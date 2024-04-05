@@ -1,15 +1,15 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Apr  4 18:26:32 EDT 2024
-Job ID:           69843
+Begin Batch Job Prologue Thu Apr  4 19:15:52 EDT 2024
+Job ID:           69867
 Username:         tus53997
 Group:            cis
 Job Name:         job_5_0
 Resources List:   walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
 Queue:            compute
 Account:          
-Nodes:            c06 
+Nodes:            c07 
 ----------------------------------------
-End Batch Job Prologue Thu Apr  4 18:26:32 EDT 2024
+End Batch Job Prologue Thu Apr  4 19:15:52 EDT 2024
 ----------------------------------------
 Temporary directory: ./tmp.tzxlYvKWrO/
 Long flag detected.
@@ -32,16 +32,16 @@ Total time for compression: 3 s
 
 Total size:     25159680 bytes
 ----------------------------------------
-Begin Batch Job Epilogue Thu Apr  4 18:26:37 EDT 2024
-Job ID:           69843
+Begin Batch Job Epilogue Thu Apr  4 19:15:57 EDT 2024
+Job ID:           69867
 Username:         tus53997
 Group:            cis
 Job Name:         job_5_0
-Session:          6674
+Session:          237874
 Limits:           walltime=01:00:00,nodes=1:ppn=1,neednodes=1:ppn=1
-Resources:        cput=00:00:19,vmem=1576356kb,walltime=00:00:05,mem=178532kb,energy_used=0
+Resources:        cput=00:00:19,vmem=1445884kb,walltime=00:00:05,mem=181352kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Apr  4 18:26:47 EDT 2024
+End Batch Job Epilogue Thu Apr  4 19:16:07 EDT 2024
 ----------------------------------------

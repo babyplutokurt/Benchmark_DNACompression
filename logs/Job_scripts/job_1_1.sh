@@ -5,7 +5,7 @@
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_1_1_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_1_1_error.log
-#PBS -W depend=afterok:69835
+#PBS -W depend=afterok:69859
 
 cd $PBS_O_WORKDIR
 module load singularity
