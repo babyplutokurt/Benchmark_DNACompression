@@ -1,10 +1,12 @@
 #!/bin/sh
 #PBS -l walltime=1:00:00
 #PBS -N job_6_0
-#PBS -l nodes=1:ppn=1
+#PBS -l nodes=1:ppn=4
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_6_0_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_6_0_error.log
+
+
 
 
 cd $PBS_O_WORKDIR
@@ -12,14 +14,14 @@ module load singularity
 
 #!/bin/bash
 START_TIME=$SECONDS
-singularity exec --bind /home/tus53997:/mnt /home/tus53997/sz3_perf_amd.sif /home/tus53997/Benchmark_DNACompression/ExternalDependencies/SZ3/bin/sz3 -f -1 63866600 -M REL 0.1 -i /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin -z /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1.sz
+singularity exec --bind /home/tus53997:/mnt /home/tus53997/sz3_perf_amd.sif /home/tus53997/Benchmark_DNACompression/ExternalDependencies/SZ3/bin/sz3 -f -1 63866600 -M REL 0.3 -i /home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin -z /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.3.sz
 END_TIME=$SECONDS
 DURATION=$((END_TIME - START_TIME))
 
 # Differentiate the handling based on the compressor type
 if [ "SZ3" == "SZ3" ]; then
     INPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin")
-    OUTPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1.sz")
+    OUTPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.3.sz")
     ADJUSTED_INPUT_SIZE=$((INPUT_SIZE / 4))
     TOTAL_ORIGINAL_SIZE=$(echo "108421061" | bc)
     TOTAL_COMPRESSED_SIZE=$(echo "17590814" | bc)
@@ -30,9 +32,13 @@ if [ "SZ3" == "SZ3" ]; then
     RATIO=$(echo "scale=2; $FINAL_ORIGINAL_SIZE / $FINAL_COMPRESSED_SIZE" | bc)
 else
     INPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin")
-    OUTPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.1.sz")
+    OUTPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_REL_0.3.sz")
     RATIO=$(echo "scale=2; $INPUT_SIZE / $OUTPUT_SIZE" | bc)
 fi
 
-echo "job_6_0,SZ3-f -1 63866600 -M REL 0.1,$DURATION,$RATIO" >> "/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv"
+echo "job_6_0,SZ3-f -1 63866600 -M REL 0.3,$DURATION,$RATIO" >> "/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv"
 
+
+source /home/tus53997/miniconda3/bin/activate compression
+
+conda deactivate

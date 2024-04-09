@@ -1,10 +1,12 @@
 #!/bin/sh
 #PBS -l walltime=1:00:00
 #PBS -N job_0_0
-#PBS -l nodes=1:ppn=1
+#PBS -l nodes=1:ppn=4
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_0_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_0_error.log
+
+
 
 
 cd $PBS_O_WORKDIR
@@ -36,3 +38,7 @@ fi
 
 echo "job_0_0,SZ3-f -1 63866600 -M ABS 0.1,$DURATION,$RATIO" >> "/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv"
 
+
+source /home/tus53997/miniconda3/bin/activate compression
+
+conda deactivate
