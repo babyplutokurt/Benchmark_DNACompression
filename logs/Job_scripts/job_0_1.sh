@@ -1,11 +1,11 @@
 #!/bin/sh
 #PBS -l walltime=1:00:00
 #PBS -N job_0_1
-#PBS -l nodes=1:ppn=4
+#PBS -l nodes=1:ppn=24
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_1_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_1_error.log
-#PBS -W depend=afterok:70118
+#PBS -W depend=afterok:70180
 
 
 

@@ -1,0 +1,30 @@
+----------------------------------------
+Begin Batch Job Prologue Wed Apr 10 22:25:07 EDT 2024
+Job ID:           70181
+Username:         tus53997
+Group:            cis
+Job Name:         job_0_1
+Resources List:   walltime=01:00:00,nodes=1:ppn=24,neednodes=1:ppn=24
+Queue:            compute
+Account:          
+Nodes:            c04 
+----------------------------------------
+End Batch Job Prologue Wed Apr 10 22:25:07 EDT 2024
+----------------------------------------
+compression ratio = 35.407978
+decompression time = 0.889705 seconds.
+decompressed file = /home/tus53997/Benchmark_DNACompression/Scripts/../DecompressedOutput/ERR103405_2_F.bin_-f_-1_63866600_-M_ABS_0.1_decompressed.sz.out
+----------------------------------------
+Begin Batch Job Epilogue Wed Apr 10 22:28:22 EDT 2024
+Job ID:           70181
+Username:         tus53997
+Group:            cis
+Job Name:         job_0_1
+Session:          210689
+Limits:           walltime=01:00:00,nodes=1:ppn=24,neednodes=1:ppn=24
+Resources:        cput=00:03:13,vmem=481500kb,walltime=00:03:16,mem=292220kb,energy_used=0
+Queue:            compute
+Account:          
+----------------------------------------
+End Batch Job Epilogue Wed Apr 10 22:28:32 EDT 2024
+----------------------------------------

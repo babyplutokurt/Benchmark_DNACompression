@@ -1,7 +1,7 @@
 #!/bin/sh
 #PBS -l walltime=1:00:00
 #PBS -N job_0_0
-#PBS -l nodes=1:ppn=4
+#PBS -l nodes=1:ppn=24
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_0_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_0_0_error.log
@@ -25,10 +25,10 @@ if [ "SZ3" == "SZ3" ]; then
     ADJUSTED_INPUT_SIZE=$((INPUT_SIZE / 4))
     TOTAL_ORIGINAL_SIZE=$(echo "108421061" | bc)
     TOTAL_COMPRESSED_SIZE=$(echo "17590814" | bc)
-    
+
     FINAL_ORIGINAL_SIZE=$(($ADJUSTED_INPUT_SIZE + $TOTAL_ORIGINAL_SIZE))
     FINAL_COMPRESSED_SIZE=$(($OUTPUT_SIZE + $TOTAL_COMPRESSED_SIZE))
-    
+
     RATIO=$(echo "scale=2; $FINAL_ORIGINAL_SIZE / $FINAL_COMPRESSED_SIZE" | bc)
 else
     INPUT_SIZE=$(stat -c %s "/home/tus53997/Benchmark_DNACompression/Scripts/../binFile/ERR103405_2_F.bin")
