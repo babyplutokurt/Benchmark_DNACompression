@@ -1,0 +1,47 @@
+----------------------------------------
+Begin Batch Job Prologue Thu Apr 11 20:49:58 EDT 2024
+Job ID:           70396
+Username:         tus53997
+Group:            cis
+Job Name:         job_input0_5_0
+Resources List:   walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Queue:            compute
+Account:          
+Nodes:            c05 
+----------------------------------------
+End Batch Job Prologue Thu Apr 11 20:49:58 EDT 2024
+----------------------------------------
+Temporary directory: ./tmp.hMaiRrV41m/
+Long flag detected.
+Starting compression...
+Preprocessing ...
+Max Read length: 152
+Total number of reads: 420175
+Preprocessing done!
+Time for this step: 228 s
+Temporary directory size: 24443848
+
+Sizes of streams after compression: 
+Reads:          14724888 bytes
+Quality:         8845984 bytes
+ID:               872976 bytes
+Creating tar archive ...Tar archive done!
+Time for this step: 0 s
+Compression done!
+Total time for compression: 228 s
+
+Total size:     24596480 bytes
+----------------------------------------
+Begin Batch Job Epilogue Thu Apr 11 20:53:48 EDT 2024
+Job ID:           70396
+Username:         tus53997
+Group:            cis
+Job Name:         job_input0_5_0
+Session:          235880
+Limits:           walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources:        cput=00:25:32,vmem=2483176kb,walltime=00:03:50,mem=1516480kb,energy_used=0
+Queue:            compute
+Account:          
+----------------------------------------
+End Batch Job Epilogue Thu Apr 11 20:53:58 EDT 2024
+----------------------------------------

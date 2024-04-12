@@ -19,7 +19,7 @@ class CommandGenerator:
 
 
 class SZ3CommandGenerator(CommandGenerator):
-    def generate_command_for_job(self, job_index):
+    def generate_command_for_job(self, job_index, input_file_index):
         # Ensure the job_index is within the range of available jobs for safety
         if job_index < 0 or job_index >= len(self.config['jobs']):
             raise ValueError("Job index out of range.")
@@ -35,7 +35,7 @@ class SZ3CommandGenerator(CommandGenerator):
         if len(job['options']) == 1:
             first_option_full = job['options'][0].replace(" ", "_")
             commands = []
-            input_file_path = os.path.join(self.project_base_dir, self.config["input_file_binary"].strip("./"))
+            input_file_path = os.path.join(self.project_base_dir, self.config["input_file_binary"][input_file_index].strip("./"))
             output_file_name = f"{os.path.basename(input_file_path)}_{first_option_full}.sz"
             output_path = os.path.join(os.path.dirname(input_file_path), output_file_name)
             command = f"{executable_path} {' '.join(job['options'])} -i {input_file_path} -o {output_path}"
@@ -43,7 +43,7 @@ class SZ3CommandGenerator(CommandGenerator):
             return commands, input_file_path, output_path, job_identifier, output_path
         elif len(job['options']) == 2:
             commands = []
-            input_file_path = os.path.join(self.project_base_dir, self.config["input_file_binary"].strip("./"))
+            input_file_path = os.path.join(self.project_base_dir, self.config["input_file_binary"][input_file_index].strip("./"))
             first_option_full = job['options'][0].replace(" ", "_")
             output_file_name = f"{os.path.basename(input_file_path)}_{first_option_full}.sz"
             original_input_file_path = input_file_path
@@ -64,7 +64,7 @@ class SZ3CommandGenerator(CommandGenerator):
 
 
 class FQZCompCommandGenerator(CommandGenerator):
-    def generate_command_for_job(self, job_index):
+    def generate_command_for_job(self, job_index, input_file_index):
         # Ensure the job_index is within the range of available jobs for safety
         if job_index < 0 or job_index >= len(self.config['jobs']):
             raise ValueError("Job index out of range.")
@@ -78,7 +78,7 @@ class FQZCompCommandGenerator(CommandGenerator):
             raise ValueError("Path for fqzcomp compressor not found.")
 
         commands = []
-        input_file_path = os.path.join(self.project_base_dir, self.config["input_file"].strip("./"))
+        input_file_path = os.path.join(self.project_base_dir, self.config["input_file"][input_file_index].strip("./"))
         first_option_full = job['options'][0].replace(" ", "_")
         output_file_name = f"{os.path.basename(input_file_path)}_{first_option_full}.fqz"
         original_input_file_path = input_file_path
@@ -106,7 +106,7 @@ class SpringCommandGenerator(CommandGenerator):
         if not self.executable_path:
             raise ValueError("Path for Spring compressor not found.")
 
-    def generate_command_for_job(self, job_index):
+    def generate_command_for_job(self, job_index, input_file_index):
         if job_index < 0 or job_index >= len(self.config['jobs']):
             raise ValueError("Job index out of range.")
 
@@ -115,7 +115,7 @@ class SpringCommandGenerator(CommandGenerator):
             return []  # Optionally, raise an error instead
         job_identifier = job['name'] + job['options'][0]
         commands = []
-        input_file_path = os.path.join(self.project_base_dir, self.config["input_file"].strip("./"))
+        input_file_path = os.path.join(self.project_base_dir, self.config["input_file"][input_file_index].strip("./"))
         first_option_full = job['options'][0].replace(" ", "_")
         output_file_name = f"{os.path.basename(input_file_path)}_{first_option_full}.spring"
         original_input_file_path = input_file_path
@@ -152,20 +152,28 @@ class CommandGeneratorWrapper:
             return json.load(json_file)
 
     def generate_all_commands(self):
-        all_commands = []
-        for i, job in enumerate(self.config['jobs']):
-            generator = self.generators.get(job['name'].upper())
-            if generator:
-                job_commands = generator.generate_command_for_job(i)
-                all_commands.append(job_commands)  # Append commands for the specific job
-            else:
-                print(f"No generator found for {job['name']}. Skipping...")
-        return all_commands
+        all_commands_for_files = []
+        for j in range(len(self.config['input_file'])):  # For each input file
+            commands_for_current_file = []  # Store all commands related to this file
+            for i, job in enumerate(self.config['jobs']):  # For each job
+                generator = self.generators.get(job['name'].upper())
+                if generator:
+                    job_commands = generator.generate_command_for_job(i, j)
+                    commands_for_current_file.append(job_commands)  # Add to the list for the current file
+                else:
+                    print(f"No generator found for {job['name']}. Skipping...")
+            all_commands_for_files.append(commands_for_current_file)
+        return all_commands_for_files
 
 
 # Example usage
 if __name__ == "__main__":
-    wrapper = CommandGeneratorWrapper("/home/tus53997/Benchmark_DNACompression/jobs/Cbench.json")
+    wrapper = CommandGeneratorWrapper("/home/tus53997/Benchmark_DNACompression/jobs/bench.json")
     all_commands = wrapper.generate_all_commands()
     for command in all_commands:
+        print(len(command))
         print(command)
+        print(command[2][0])
+        print(command[2][1])
+        print(command[2][2])
+        print(command[2][3])

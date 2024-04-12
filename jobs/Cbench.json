@@ -1,22 +1,35 @@
 {
   "project-home": "",
   "jobs_header": "-l walltime=1:00:00 -l nodes=1:ppn=1",
-  "input_file": "./Fastq/ERR103405_2.fastq",
-  "input_file_binary": "./binFile/ERR103405_2_F.bin",
-  "reference_file": "/home/tus53997/ExternalDependencies/Renano/Renano/datasets/yst/yst_genome.fna",
+  "input_file": [
+    "./Fastq/ERR103405_2.fastq",
+    "./Fastq/ERR103405_1.fastq"
+  ],
+  "input_file_binary": [
+    "./binFile/ERR103405_2_F.bin",
+    "./binFile/ERR103405_1_F.bin"
+  ],
+  "reference_file": "/home/tus53997/Fastq/hg38.fa",
   "job_type": "Compression-Decompression",
   "jobs": [
     {
-      "name": "SZ3",
+      "name": "fqzcomp",
       "options": [
-        "-f -1 63866600 -M ABS 0.1",
-        "-f -1 63866600 -M ABS 0.1"
+        "-Q 5",
+        "-d"
       ]
     },
     {
       "name": "fqzcomp",
       "options": [
-        "-Q 5",
+        "-Q 10",
+        "-d"
+      ]
+    },
+    {
+      "name": "fqzcomp",
+      "options": [
+        "-Q 2",
         "-d"
       ]
     },
@@ -55,18 +68,25 @@
         "-f -1 63866600 -M REL 0.1"
       ]
     },
-        {
-      "name": "SZ3",
-      "options": [
-        "-f -2 152 420175 -M ABS 0.1",
-        "-f -2 152 420175 -M ABS 0.1"
-      ]
-    },
     {
       "name": "SZ3",
       "options": [
         "-f -1 63866600 -M REL 0.2",
         "-f -1 63866600 -M REL 0.2"
+      ]
+    },
+    {
+      "name": "SZ3",
+      "options": [
+        "-f -1 63866600 -M ABS 0.1",
+        "-f -1 63866600 -M ABS 0.1"
+      ]
+    },
+    {
+      "name": "SZ3",
+      "options": [
+        "-f -1 63866600 -M ABS 0.2",
+        "-f -1 63866600 -M ABS 0.2"
       ]
     }
   ]

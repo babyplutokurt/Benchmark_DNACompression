@@ -1,0 +1,27 @@
+----------------------------------------
+Begin Batch Job Prologue Thu Apr 11 02:03:23 EDT 2024
+Job ID:           70203
+Username:         tus53997
+Group:            cis
+Job Name:         Size_cheker
+Resources List:   walltime=01:00:00,nodes=1:ppn=24,neednodes=1:ppn=24
+Queue:            compute
+Account:          
+Nodes:            c08 
+----------------------------------------
+End Batch Job Prologue Thu Apr 11 02:03:23 EDT 2024
+----------------------------------------
+----------------------------------------
+Begin Batch Job Epilogue Thu Apr 11 03:04:10 EDT 2024
+Job ID:           70203
+Username:         tus53997
+Group:            cis
+Job Name:         Size_cheker
+Session:          124979
+Limits:           walltime=01:00:00,nodes=1:ppn=24,neednodes=1:ppn=24
+Resources:        cput=01:00:26,vmem=232648kb,walltime=01:00:47,mem=43376kb,energy_used=0
+Queue:            compute
+Account:          
+----------------------------------------
+End Batch Job Epilogue Thu Apr 11 03:04:20 EDT 2024
+----------------------------------------

@@ -26,12 +26,6 @@ class QualityConverter:
     def convert_to_integer(self, matrix):
         """
         Convert float numbers in a 2-dimensional numpy matrix to integers based on the mode determined by the range of numbers.
-
-        Parameters:
-        matrix (numpy.ndarray): 2-dimensional numpy matrix
-
-        Returns:
-        numpy.ndarray: Matrix with float numbers converted to integers.
         """
         # Check if the input is a numpy array
         if not isinstance(matrix, np.ndarray):
@@ -59,12 +53,6 @@ class QualityConverter:
     def decompress_loader(self, file_path, mode="Probability"):
         """
         Load a binary file of float values to self.decompressQuality.
-
-        Parameters:
-        file_path (str): Path to the binary file.
-
-        Returns:
-        None
         """
         negative_count = 0
 
@@ -73,7 +61,7 @@ class QualityConverter:
             nonlocal negative_count
             if e <= 0:
                 # Return a default value (or handle the error as needed)
-                e = abs(e) + 0.0000000000001
+                e = abs(e) + 0.0000000000000001
                 negative_count += 1
                 # return 42
             res = -10 * math.log10(e)
@@ -83,10 +71,10 @@ class QualityConverter:
 
         def fixedDiff(q):
             res = math.ceil(q * self.maxQualityScore)
-            if res <= 2:
+            if res <= 0:
                 res = 2
             elif res >= 42:
-                res = 42
+                res = 41
             return res
 
         decompress_data = np.fromfile(file_path, dtype=np.float32)
@@ -110,12 +98,6 @@ class QualityConverter:
     def fastq_loader(self, file_path, mode="Probability", type="Raw"):
         """
         Load a FASTQ file, extract quality scores, and convert them to integers using Biopython.
-
-        Parameters:
-        file_path (str): Path to the FASTQ file.
-
-        Returns:
-        numpy.ndarray: Matrix of quality scores converted to integers.
         """
 
         def probability_helper(q):
@@ -127,7 +109,7 @@ class QualityConverter:
             if isinstance(record.letter_annotations["phred_quality"][0], int):
                 scores = record.letter_annotations["phred_quality"]
             else:
-                scores = [ord(char) - 33 for char in record.letter_annotations["phred_quality"]]
+                scores = [ord(char) - 32 for char in record.letter_annotations["phred_quality"]]
             quality_scores.append(scores)
 
         # Convert the list of lists to a numpy array
@@ -139,21 +121,38 @@ class QualityConverter:
             self.rawQuality = quality_matrix
             self.minQualityScore = np.min(quality_matrix)
             self.maxQualityScore = np.max(quality_matrix)
+            print("self.maxQualityScore: ", self.maxQualityScore)
+            print("self.minQualityScore: ", self.minQualityScore)
         elif type == "Decompressed":
             self.decompressQuality = quality_matrix
         return
 
-    def fastq_writer(self, file_path, output_path, mode="Probability", buffer_size=500):
+    def fastq_length_checker(self, file_path, output_path, mode="FixedDiff", buffer_size=500):
+        length_set = set()
+        maxQualityScore = 0
+        minQualityScore = 42
+        record_counter = 0
+        for record in SeqIO.parse(file_path, "fastq"):
+            record_counter += 1
+            maxQualityScore = max(max(record.letter_annotations["phred_quality"]), maxQualityScore)
+            minQualityScore = min(min(record.letter_annotations["phred_quality"]), minQualityScore)
+            if record_counter >= 50000:
+                break
+        print("Quality Score Range: ", minQualityScore, maxQualityScore)
+        record_counter = 0
+        with open(output_path, 'wb') as f:
+            for record in SeqIO.parse(file_path, "fastq"):
+                length_set.add(len(record.letter_annotations["phred_quality"]))
+                record_counter += 1
+
+        print("Total lines: ", record_counter)
+        print("Length Set: ", length_set)
+
+    def fastq_writer(self, file_path, output_path, mode="FixedDiff", buffer_size=500):
         """
         Retrieve quality scores from a FASTQ file, convert them to float, and write them to a binary file.
-
-        Parameters:
-        file_path (str): Path to the input FASTQ file.
-        output_path (str): Path to the output binary file.
-
-        Returns:
-        None
         """
+        length_set = set()
 
         def probability_helper(q):
             return 10 ** (-q / 10)
@@ -161,33 +160,51 @@ class QualityConverter:
         def fixedDiff(q):
             return q / self.maxQualityScore
 
+        record_counter = 0
         quality_scores = []
         for record in SeqIO.parse(file_path, "fastq"):
-            quality_scores.append(record.letter_annotations["phred_quality"])
+            # quality_scores.append(record.letter_annotations["phred_quality"])
 
-        # Convert quality scores to float
+            record_counter += 1
+            if record_counter >= 5000:
+                break
         quality_float = np.array(quality_scores, dtype=np.float32)
+        print("Quality Score Range: ", np.min(quality_float), np.max(quality_float))
         self.maxQualityScore = np.max(quality_float)
-        if mode == "Probability":
-            quality_float = probability_helper(quality_float)
-        elif mode == "qualityScore":
-            pass
-        elif mode == "FixedDiff":
-            quality_float = fixedDiff(quality_float)
 
-        print("Quality Score Range: ", np.max(quality_float), np.min(quality_float))
-        print(quality_float[0])
-
-        # Write to binary file
+        record_counter = 0
+        quality_scores.clear()
         with open(output_path, 'wb') as f:
+            for record in SeqIO.parse(file_path, "fastq"):
+                length_set.add(len(record.letter_annotations["phred_quality"]))
+                # quality_scores.extend(record.letter_annotations["phred_quality"])
+                record_counter += 1
+                if record_counter % 50000 == 0:
+                    # print("Batch: ", record_counter // 5000)
+                    quality_float = np.array(quality_scores, dtype=np.float32)
+                    if mode == "Probability":
+                        quality_float = probability_helper(quality_float)
+                    elif mode == "qualityScore":
+                        pass
+                    elif mode == "FixedDiff":
+                        quality_float = fixedDiff(quality_float)
+                    quality_float.tofile(f)
+                    quality_scores.clear()
+
+            # quality_float = np.array(quality_scores, dtype=np.float32)
+            if mode == "Probability":
+                quality_float = probability_helper(quality_float)
+            elif mode == "qualityScore":
+                pass
+            elif mode == "FixedDiff":
+                quality_float = fixedDiff(quality_float)
             quality_float.tofile(f)
+            quality_scores.clear()
+        print("Total lines: ", record_counter)
 
     def error_calculator(self):
         """
         Calculate the Peak Signal-to-Noise Ratio (PSNR) between self.rawQuality and self.decompressQuality.
-
-        Returns:
-        float: The PSNR value.
         """
         # Check if both matrices have the same shape
         if self.rawQuality.shape != self.decompressQuality.shape:
@@ -212,31 +229,9 @@ class QualityConverter:
         return psnr, mse, psnr_p, mse_p
 
 
-
-"""
-a = QualityConverter()
-# a.fastq_writer("/Users/kurtyang/PycharmProjects/DNA_Compression/FastQ/ERR103405_2.fastq", "/Users/kurtyang/PycharmProjects/DNA_Compression/FastQ_bin/ERR103405_2_F.bin", mode="FixedDiff")
-
-a.fastq_loader("/Users/kurtyang/PycharmProjects/DNA_Compression/FastQ/ERR103405_2.fastq")
-# a.fastq_loader("/Users/kurtyang/PycharmProjects/DNA_Compression/FastQ/ERR103405_QualComp_4_2.fastq", type="Decompressed")
-a.decompress_loader("/Users/kurtyang/PycharmProjects/DNA_Compression/FastQ_bin/ERR103405_2_F.bin.sz", mode="FixedDiff")
-print(a.rawQuality.shape)
-print(a.decompressQuality.shape)
-# print(a.rawQuality[1] - a.decompressQuality[1])
-print(a.rawQuality[1])
-print(a.decompressQuality[1])
-print(a.rawQuality[2] - a.decompressQuality[2])
-print(a.rawQuality[3] - a.decompressQuality[3])
-print(a.rawQuality[4] - a.decompressQuality[4])
-
-unique_values = np.unique(a.decompressQuality)
-unique_diff = np.unique((a.decompressQuality - a.rawQuality))
-print("Range: ", unique_diff.max(), " ", unique_diff.min())
-
-print("Unique Value: ", unique_values)
-print("Unique Difference: ", unique_diff)
-
-# print(a.decompressQuality[2])
-
-a.error_calculator()
-"""
+if __name__ == "__main__":
+    a = QualityConverter()
+    a.fastq_length_checker("/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R1_001.fastq",
+                   "/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R1_001.fastq.bin")
+    a.fastq_length_checker("/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R2_001.fastq",
+                   "/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R2_001.fastq.bin")

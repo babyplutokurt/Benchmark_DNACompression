@@ -6,12 +6,13 @@ from Command_generator import CommandGeneratorWrapper
 import csv
 
 
-def generate_and_submit_job(job_name, commands, input_path, output_path, job_identifier, size_metrics, max_quality_char,
+def generate_and_submit_job(job_name, commands, input_path, output_path, job_identifier, size_metric, max_quality_char,
+                            file_index,
                             singularity_image="/home/tus53997/sz3_perf_amd.sif",
                             output_dir="/home/tus53997/Benchmark_DNACompression/logs/Job_scripts", dependency=""):
     os.makedirs(output_dir, exist_ok=True)
     log_path = "/home/tus53997/Benchmark_DNACompression/logs/logs"
-    metrics_file_path = "/home/tus53997/Benchmark_DNACompression/logs/compression_metrics.csv"
+    metrics_file_path = f"/home/tus53997/Benchmark_DNACompression/logs/compression_metrics{file_index}.csv"
     os.makedirs(log_path, exist_ok=True)
 
     for i, command in enumerate(commands):
@@ -37,8 +38,8 @@ if [ "{compressor_type}" == "SZ3" ]; then
     INPUT_SIZE=$(stat -c %s "{input_path}")
     OUTPUT_SIZE=$(stat -c %s "{output_path}")
     ADJUSTED_INPUT_SIZE=$((INPUT_SIZE / 4))
-    TOTAL_ORIGINAL_SIZE=$(echo "{sum(size_metrics[file]['original_size'] for file in size_metrics)}" | bc)
-    TOTAL_COMPRESSED_SIZE=$(echo "{sum(size_metrics[file]['compressed_size'] for file in size_metrics if file != 'quality_identifiers.fastq')}" | bc)
+    TOTAL_ORIGINAL_SIZE=$(echo "{sum(size_metric[file]['original_size'] for file in size_metric)}" | bc)
+    TOTAL_COMPRESSED_SIZE=$(echo "{sum(size_metric[file]['compressed_size'] for file in size_metric if file != 'quality_identifiers.fastq')}" | bc)
 
     FINAL_ORIGINAL_SIZE=$(($ADJUSTED_INPUT_SIZE + $TOTAL_ORIGINAL_SIZE))
     FINAL_COMPRESSED_SIZE=$(($OUTPUT_SIZE + $TOTAL_COMPRESSED_SIZE))
@@ -59,10 +60,9 @@ echo "{individual_job_name},{job_identifier},$DURATION,$RATIO" >> "{metrics_file
             command_script = f"singularity exec --bind /home/tus53997:/mnt {singularity_image} {command}"
             compressor_type = "SZ3" if 'SZ3' in command else "Other"
             if compressor_type == "SZ3":
-                base_seq_path = "/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/dna_bases.fastq"
-                base_id_path = "/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/base_identifiers.fastq"
-                quality_id_path = ("/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields"
-                                   "/quality_identifiers.fastq")
+                base_seq_path = f"/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/dna_bases{file_index}.fastq"
+                base_id_path = f"/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/base_identifiers{file_index}.fastq"
+                quality_id_path = f"/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/quality_identifiers{file_index}.fastq"
                 sz_output_path = ""
 
                 normalized_path = os.path.normpath(output_path)
@@ -85,7 +85,7 @@ python -c "import sys; sys.path.append('/home/tus53997/Benchmark_DNACompression/
         job_template = f"""#!/bin/sh
 #PBS -l walltime=1:00:00
 #PBS -N {individual_job_name}
-#PBS -l nodes=1:ppn=24
+#PBS -l nodes=1:ppn=12
 #PBS -M taolue.yang@temple.edu
 #PBS -o {log_path}/{individual_job_name}_output.log
 #PBS -e {log_path}/{individual_job_name}_error.log
@@ -116,92 +116,116 @@ conda deactivate
     return dependency
 
 
-def generate_bash_script(fastq_file_path, output_directory):
+def generate_bash_script(fastq_file_path, output_directory, index):
     # Ensure the output directory exists
     os.makedirs(output_directory, exist_ok=True)
 
     bash_script_content = f"""#!/bin/bash
 
 # Extract the different fields from the FASTQ file
-awk 'NR%4==1 {{print > "{output_directory}/base_identifiers.fastq"}} NR%4==2 {{print > "{output_directory}/dna_bases.fastq"}} NR%4==3 {{print > "{output_directory}/quality_identifiers.fastq"}}' {fastq_file_path}
+awk 'NR%4==1 {{print > "{output_directory}/base_identifiers{index}.fastq"}} NR%4==2 {{print > "{output_directory}/dna_bases{index}.fastq"}} NR%4==3 {{print > "{output_directory}/quality_identifiers{index}.fastq"}}' {fastq_file_path}
 
 # Compress each field with zstd
-zstd --ultra --long -f {output_directory}/base_identifiers.fastq
-zstd --ultra --long -f {output_directory}/dna_bases.fastq
-zstd --ultra --long -f {output_directory}/quality_identifiers.fastq
+zstd --ultra --long -f {output_directory}/base_identifiers{index}.fastq
+zstd --ultra --long -f {output_directory}/dna_bases{index}.fastq
+zstd --ultra --long -f {output_directory}/quality_identifiers{index}.fastq
 """
     return bash_script_content
 
 
 def compress_fastq_fields(config_path):
     max_quality_char = '!'
-    # Load the configuration file to get the FASTQ file path
+    # Load the configuration file to get the FASTQ file paths
     with open(config_path, 'r') as config_file:
         config = json.load(config_file)
-        fastq_file_path = config["input_file"]
+        fastq_files = config["input_file"]
 
-    with open('../' + fastq_file_path, 'r') as fastq_file:
-        for i, line in enumerate(fastq_file):
-            if (i + 1) % 4 == 0:  # Quality score lines
-                max_quality_char = max(max_quality_char, max(line.strip(), default='!'))
+    # Ensure fastq_files is a list for uniform handling
+    if not isinstance(fastq_files, list):
+        fastq_files = [fastq_files]
 
-    output_directory = "/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields"
-    fastq_file_path = os.path.join("/home/tus53997/Benchmark_DNACompression/Scripts/../", fastq_file_path)
-    bash_script = generate_bash_script(fastq_file_path, output_directory)
-
-    script_path = "/home/tus53997/Benchmark_DNACompression/logs/Pre_warm_scripts/compress_fastq_fields.sh"
-    with open(script_path, 'w') as script_file:
-        script_file.write(bash_script)
-    os.chmod(script_path, 0o755)
-    subprocess.run(script_path, shell=True, check=True)
     size_metrics = {}
-    files = ["base_identifiers.fastq", "dna_bases.fastq", "quality_identifiers.fastq"]
+    output_directory = "/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields"
 
-    # Calculate and store both original and compressed sizes for each file
-    for file in files:
-        original_path = os.path.join(output_directory, file)
-        compressed_path = f"{original_path}.zst"
-        original_size = os.path.getsize(original_path)
-        compressed_size = os.path.getsize(compressed_path)
+    for index, fastq_file in enumerate(fastq_files):
+        fastq_file_path = os.path.join("/home/tus53997/Benchmark_DNACompression/Scripts/../", fastq_file)
+        bash_script = generate_bash_script(fastq_file_path, output_directory, index)
 
-        # Store the sizes in the dictionary
-        size_metrics[file] = {"original_size": original_size, "compressed_size": compressed_size}
+        script_path = f"/home/tus53997/Benchmark_DNACompression/logs/Pre_warm_scripts/compress_fastq_fields_{os.path.basename(fastq_file)}.sh"
+        with open(script_path, 'w') as script_file:
+            script_file.write(bash_script)
+        os.chmod(script_path, 0o755)
+        subprocess.run(script_path, shell=True, check=True)
+
+        file_size_metrics = {}
+        # Using f-string to incorporate index into filenames
+        files = [f"base_identifiers{index}.fastq", f"dna_bases{index}.fastq", f"quality_identifiers{index}.fastq"]
+        for file in files:
+            original_path = os.path.join(output_directory, file)
+            compressed_path = f"{original_path}.zst"
+            original_size = os.path.getsize(original_path)
+            compressed_size = os.path.getsize(compressed_path)
+            # Store the sizes in the dictionary under the file name including the index
+            file_size_metrics[file] = {"original_size": original_size, "compressed_size": compressed_size}
+
+        # Update size_metrics with the metrics for the current file, including the index in the key
+        size_metrics[f"file_{index}"] = file_size_metrics
+
+        # Calculate max_quality_char across all files
+        with open(fastq_file_path, 'r') as fastq_file:
+            for i, line in enumerate(fastq_file):
+                if (i + 1) % 4 == 0:  # Quality score lines
+                    max_quality_char = max(max_quality_char, max(line.strip(), default='!'))
+                    if i >= 1000:
+                        break
+
     print(size_metrics)
-    # Return the size metrics dictionary
     return size_metrics, max_quality_char
 
 
 def main(config_name, size_metrics, max_quality_char):
     wrapper = CommandGeneratorWrapper(config_name)
-    all_commands = wrapper.generate_all_commands()
+    all_commands_global = wrapper.generate_all_commands()
 
-    for i, job_commands_and_path in enumerate(all_commands):
-        job_commands = job_commands_and_path[0]
-        input_path = job_commands_and_path[1]
-        output_path = job_commands_and_path[2]
-        job_identifier = job_commands_and_path[3]
-        print(job_identifier)
-        print(job_commands)
-        if job_commands:  # Ensure there are commands to execute
-            job_name = f"job_{i}"  # Generate a unique job name, adjust as needed
-            generate_and_submit_job(job_name, job_commands, input_path, output_path, job_identifier, size_metrics,
-                                    max_quality_char)
-            # print(job_name, job_commands, input_path, output_path, job_identifier)
+    for file_index, all_commands in enumerate(all_commands_global):
+        for i, job_commands_and_path in enumerate(all_commands):
+            print(job_commands_and_path)
+            job_commands = job_commands_and_path[0]
+            input_path = job_commands_and_path[1]
+            output_path = job_commands_and_path[2]
+            job_identifier = job_commands_and_path[3]
+            print(job_identifier)
+            print(job_commands)
+            if job_commands:  # Ensure there are commands to execute
+                job_name = f"job_input{file_index}_{i}"
+                metric_name = f'file_{file_index}'  # Generate a unique job name, adjust as needed
+                size_metric = size_metrics[metric_name]
+                generate_and_submit_job(job_name, job_commands, input_path, output_path, job_identifier, size_metric,
+                                        max_quality_char, file_index)
+                # print(job_name, job_commands, input_path, output_path, job_identifier)
 
 
 if __name__ == "__main__":
     current_working_directory = os.getcwd()
     config_name = current_working_directory + "/../jobs/Cbench.json"
     size_metrics, max_quality_char = compress_fastq_fields(config_name)
+
     size_metrics_path = current_working_directory + '/../logs/size_metrics.json'
     with open(size_metrics_path, 'w') as file:
         json.dump(size_metrics, file, indent=4)
     print(f"Size metrics successfully saved to {size_metrics_path}.")
-    filename = current_working_directory + '/../logs/compression_metrics.csv'
-    header = ['job_id', 'Compressor Name', 'Time (seconds)', 'Ratio']
-    with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
+
+    # Determine the number of input files based on the length of the 'size_metrics' dictionary
+    num_input_files = len(size_metrics)
+
+    # Create a CSV file for each input file
+    for i in range(num_input_files):
+        filename = current_working_directory + f'/../logs/compression_metrics{i}.csv'
+        header = ['job_id', 'Compressor Name', 'Time (seconds)', 'Ratio']
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(header)  # Ensure header is written inside the 'with open' block
+
     print("max_quality_char: ", max_quality_char)
     print("max_quality_Value: ", ord(max_quality_char))
     main(config_name, size_metrics, max_quality_char)

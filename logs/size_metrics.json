@@ -1,14 +1,30 @@
 {
-    "base_identifiers.fastq": {
-        "original_size": 22067143,
-        "compressed_size": 3465829
+    "file_0": {
+        "base_identifiers0.fastq": {
+            "original_size": 22067143,
+            "compressed_size": 3465829
+        },
+        "dna_bases0.fastq": {
+            "original_size": 64286775,
+            "compressed_size": 14124985
+        },
+        "quality_identifiers0.fastq": {
+            "original_size": 22067143,
+            "compressed_size": 3465830
+        }
     },
-    "dna_bases.fastq": {
-        "original_size": 64286775,
-        "compressed_size": 14124985
-    },
-    "quality_identifiers.fastq": {
-        "original_size": 22067143,
-        "compressed_size": 3465830
+    "file_1": {
+        "base_identifiers1.fastq": {
+            "original_size": 22067143,
+            "compressed_size": 3465829
+        },
+        "dna_bases1.fastq": {
+            "original_size": 64286775,
+            "compressed_size": 14124985
+        },
+        "quality_identifiers1.fastq": {
+            "original_size": 22067143,
+            "compressed_size": 3465830
+        }
     }
 }
