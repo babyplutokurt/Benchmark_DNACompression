@@ -33,5 +33,5 @@ def analyze_fastq(file_path):
 
 # Example usage
 if __name__ == "__main__":
-    file_path = '/Fastq/ERR103405_2.fastq'  # Update with your FASTQ file path
+    file_path = '/home/tus53997/Benchmark_DNACompression/DecompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin_-f_-1_5126799450_-M_REL_0.9_decompressed.sz.out.fastq'  # Update with your FASTQ file path
     analyze_fastq(file_path)

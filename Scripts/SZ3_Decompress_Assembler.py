@@ -16,7 +16,7 @@ def reconstruct_fastq(base_seq_path, base_id_path, quality_id_path, binary_float
     # Function to convert float quality scores back to characters
     def float_to_quality(quality_float):
         decompressed_score = round(quality_float * max_quality_score)
-        decompressed_score = min(decompressed_score, max_quality_score)
+        decompressed_score = max(33, min(decompressed_score, max_quality_score))
         return chr(decompressed_score + ord('!'))
 
     with open(base_seq_path) as base_seqs, open(base_id_path) as base_ids, \

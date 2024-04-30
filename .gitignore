@@ -3,3 +3,5 @@ CompressedOutput/
 DecompressedOutput/
 binFile/
 ExternalDependencies/
+SAM/
+Scripts/tmp.*

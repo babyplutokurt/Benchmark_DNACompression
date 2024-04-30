@@ -67,6 +67,8 @@ class QualityConverter:
             res = -10 * math.log10(e)
             if res > 42:
                 res = 42
+            if res < 2:
+                res = 2
             return res
 
         def fixedDiff(q):
@@ -163,12 +165,13 @@ class QualityConverter:
         record_counter = 0
         quality_scores = []
         for record in SeqIO.parse(file_path, "fastq"):
-            # quality_scores.append(record.letter_annotations["phred_quality"])
+            quality_scores.append(record.letter_annotations["phred_quality"])
 
             record_counter += 1
             if record_counter >= 5000:
                 break
         quality_float = np.array(quality_scores, dtype=np.float32)
+        print("Shape: ", quality_float.shape)
         print("Quality Score Range: ", np.min(quality_float), np.max(quality_float))
         self.maxQualityScore = np.max(quality_float)
 
@@ -176,11 +179,11 @@ class QualityConverter:
         quality_scores.clear()
         with open(output_path, 'wb') as f:
             for record in SeqIO.parse(file_path, "fastq"):
-                length_set.add(len(record.letter_annotations["phred_quality"]))
-                # quality_scores.extend(record.letter_annotations["phred_quality"])
+                # length_set.add(len(record.letter_annotations["phred_quality"]))
+                quality_scores.extend(record.letter_annotations["phred_quality"])
                 record_counter += 1
                 if record_counter % 50000 == 0:
-                    # print("Batch: ", record_counter // 5000)
+                    # print("Batch: ", record_counter // 50000)
                     quality_float = np.array(quality_scores, dtype=np.float32)
                     if mode == "Probability":
                         quality_float = probability_helper(quality_float)
@@ -191,7 +194,7 @@ class QualityConverter:
                     quality_float.tofile(f)
                     quality_scores.clear()
 
-            # quality_float = np.array(quality_scores, dtype=np.float32)
+            quality_float = np.array(quality_scores, dtype=np.float32)
             if mode == "Probability":
                 quality_float = probability_helper(quality_float)
             elif mode == "qualityScore":
@@ -231,7 +234,7 @@ class QualityConverter:
 
 if __name__ == "__main__":
     a = QualityConverter()
-    a.fastq_length_checker("/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R1_001.fastq",
-                   "/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R1_001.fastq.bin")
-    a.fastq_length_checker("/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R2_001.fastq",
-                   "/home/tus53997/Fastq/HG00096_GT20-08877_CGTTAGAA-TTCAGGTC_S21_L003_R2_001.fastq.bin")
+    a.fastq_writer("/home/tus53997/Benchmark_DNACompression/Fastq/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R1.fastq",
+                   "/home/tus53997/Benchmark_DNACompression/binFile/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R1.bin")
+    a.fastq_writer("/home/tus53997/Benchmark_DNACompression/Fastq/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.fastq",
+                   "/home/tus53997/Benchmark_DNACompression/binFile/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin")

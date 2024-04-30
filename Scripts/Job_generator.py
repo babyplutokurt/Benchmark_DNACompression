@@ -83,7 +83,7 @@ python -c "import sys; sys.path.append('/home/tus53997/Benchmark_DNACompression/
 
         # Job template including the command script
         job_template = f"""#!/bin/sh
-#PBS -l walltime=1:00:00
+#PBS -l walltime=168:00:00
 #PBS -N {individual_job_name}
 #PBS -l nodes=1:ppn=12
 #PBS -M taolue.yang@temple.edu
@@ -105,7 +105,7 @@ conda deactivate
         with open(job_script_path, 'w') as job_script:
             job_script.write(job_template)
 
-        print(f"Job script generated: {job_script_path}")
+        # print(f"Job script generated: {job_script_path}")
 
         submission_command = f"qsub {job_script_path}"
         result = subprocess.run(submission_command, shell=True, check=True, capture_output=True, text=True)
@@ -189,13 +189,13 @@ def main(config_name, size_metrics, max_quality_char):
 
     for file_index, all_commands in enumerate(all_commands_global):
         for i, job_commands_and_path in enumerate(all_commands):
-            print(job_commands_and_path)
+            # print(job_commands_and_path)
             job_commands = job_commands_and_path[0]
             input_path = job_commands_and_path[1]
             output_path = job_commands_and_path[2]
             job_identifier = job_commands_and_path[3]
-            print(job_identifier)
-            print(job_commands)
+            # print(job_identifier)
+            # print(job_commands)
             if job_commands:  # Ensure there are commands to execute
                 job_name = f"job_input{file_index}_{i}"
                 metric_name = f'file_{file_index}'  # Generate a unique job name, adjust as needed
@@ -207,7 +207,7 @@ def main(config_name, size_metrics, max_quality_char):
 
 if __name__ == "__main__":
     current_working_directory = os.getcwd()
-    config_name = current_working_directory + "/../jobs/Cbench.json"
+    config_name = current_working_directory + "/../jobs/bench.json"
     size_metrics, max_quality_char = compress_fastq_fields(config_name)
 
     size_metrics_path = current_working_directory + '/../logs/size_metrics.json'

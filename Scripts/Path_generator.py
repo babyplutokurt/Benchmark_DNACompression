@@ -89,4 +89,3 @@ if __name__ == "__main__":
             print("Decompressed File Path:", file_paths["decompressed_file_path"])
             print(Size_checker.get_file_size(file_paths["decompressed_file_path"]))
             print("-" * 40)
-
