@@ -1,27 +1,27 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Apr 11 20:49:46 EDT 2024
-Job ID:           70388
+Begin Batch Job Prologue Thu May  2 23:54:05 EDT 2024
+Job ID:           70934
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_1_0
-Resources List:   walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources List:   walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
 Queue:            compute
 Account:          
-Nodes:            c08 
+Nodes:            c07 
 ----------------------------------------
-End Batch Job Prologue Thu Apr 11 20:49:46 EDT 2024
+End Batch Job Prologue Thu May  2 23:54:06 EDT 2024
 ----------------------------------------
 ----------------------------------------
-Begin Batch Job Epilogue Thu Apr 11 20:49:51 EDT 2024
-Job ID:           70388
+Begin Batch Job Epilogue Thu May  2 23:58:32 EDT 2024
+Job ID:           70934
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_1_0
-Session:          140396
-Limits:           walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
-Resources:        cput=00:00:06,vmem=170220kb,walltime=00:00:05,mem=21024kb,energy_used=0
+Session:          57750
+Limits:           walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources:        cput=00:07:36,vmem=1152712kb,walltime=00:04:27,mem=100544kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Apr 11 20:50:01 EDT 2024
+End Batch Job Epilogue Thu May  2 23:58:42 EDT 2024
 ----------------------------------------

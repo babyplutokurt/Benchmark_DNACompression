@@ -219,8 +219,13 @@ if __name__ == "__main__":
     num_input_files = len(size_metrics)
 
     # Create a CSV file for each input file
-    for i in range(num_input_files):
-        filename = current_working_directory + f'/../logs/compression_metrics{i}.csv'
+    with open(config_name, 'r') as config_file_for_csv:
+        config = json.load(config_file_for_csv)
+        fastq_files_csv = config["input_file"]
+        bianry_files_csv = config["input_file_binary"]
+
+    for input_file_csv, binary_input_file_csv in zip(fastq_files_csv, bianry_files_csv):
+        filename = current_working_directory + f'/../logs/compression_metrics_{input_file_csv}.csv'
         header = ['job_id', 'Compressor Name', 'Time (seconds)', 'Ratio']
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)

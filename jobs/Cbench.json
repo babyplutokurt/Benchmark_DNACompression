@@ -1,49 +1,22 @@
 {
   "project-home": "",
-  "jobs_header": "-l walltime=1:00:00 -l nodes=1:ppn=1",
+  "jobs_header": "-l walltime=168:00:00 -l nodes=1:ppn=1",
   "input_file": [
-    "./Fastq/ERR103405_2.fastq",
-    "./Fastq/ERR103405_1.fastq"
+    "./Fastq/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R1.fastq",
+    "./Fastq/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.fastq"
   ],
   "input_file_binary": [
-    "./binFile/ERR103405_2_F.bin",
-    "./binFile/ERR103405_1_F.bin"
+    "./binFile/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R1.bin",
+    "./binFile/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin"
   ],
   "reference_file": "/home/tus53997/Fastq/hg38.fa",
+  "reference_already": true,
   "job_type": "Compression-Decompression",
   "jobs": [
     {
       "name": "fqzcomp",
       "options": [
         "-Q 5",
-        "-d"
-      ]
-    },
-    {
-      "name": "fqzcomp",
-      "options": [
-        "-Q 10",
-        "-d"
-      ]
-    },
-    {
-      "name": "fqzcomp",
-      "options": [
-        "-Q 2",
-        "-d"
-      ]
-    },
-    {
-      "name": "spring",
-      "options": [
-        "-c -l -q qvz 0.6",
-        "-d"
-      ]
-    },
-    {
-      "name": "spring",
-      "options": [
-        "-c -l -q qvz 0.8",
         "-d"
       ]
     },
@@ -64,29 +37,8 @@
     {
       "name": "SZ3",
       "options": [
-        "-f -1 63866600 -M REL 0.1",
-        "-f -1 63866600 -M REL 0.1"
-      ]
-    },
-    {
-      "name": "SZ3",
-      "options": [
-        "-f -1 63866600 -M REL 0.2",
-        "-f -1 63866600 -M REL 0.2"
-      ]
-    },
-    {
-      "name": "SZ3",
-      "options": [
-        "-f -1 63866600 -M ABS 0.1",
-        "-f -1 63866600 -M ABS 0.1"
-      ]
-    },
-    {
-      "name": "SZ3",
-      "options": [
-        "-f -1 63866600 -M ABS 0.2",
-        "-f -1 63866600 -M ABS 0.2"
+        "-f -1 5126799450 -M REL 0.1",
+        "-f -1 5126799450 -M REL 0.1"
       ]
     }
   ]

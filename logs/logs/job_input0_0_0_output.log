@@ -1,27 +1,30 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Apr 11 20:49:36 EDT 2024
-Job ID:           70386
+Begin Batch Job Prologue Thu May  2 23:53:55 EDT 2024
+Job ID:           70932
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_0_0
-Resources List:   walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources List:   walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
 Queue:            compute
 Account:          
-Nodes:            c08 
+Nodes:            c07 
 ----------------------------------------
-End Batch Job Prologue Thu Apr 11 20:49:36 EDT 2024
+End Batch Job Prologue Thu May  2 23:53:55 EDT 2024
 ----------------------------------------
+compression ratio = 215.54 
+compression time = 323.979751
+compressed data file = /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R1.bin_-f_-1_5126799450_-M_REL_0.8.sz
 ----------------------------------------
-Begin Batch Job Epilogue Thu Apr 11 20:49:41 EDT 2024
-Job ID:           70386
+Begin Batch Job Epilogue Thu May  2 23:59:48 EDT 2024
+Job ID:           70932
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_0_0
-Session:          140186
-Limits:           walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
-Resources:        cput=00:00:06,vmem=0kb,walltime=00:00:05,mem=0kb,energy_used=0
+Session:          57596
+Limits:           walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources:        cput=00:05:34,vmem=85950832kb,walltime=00:05:52,mem=61411592kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Apr 11 20:49:51 EDT 2024
+End Batch Job Epilogue Thu May  2 23:59:58 EDT 2024
 ----------------------------------------

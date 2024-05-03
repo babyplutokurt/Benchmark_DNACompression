@@ -1,18 +1,25 @@
 #!/bin/sh
-#PBS -l walltime=1:00:00
+#PBS -l walltime=168:00:00
 #PBS -N job_input1_0_1
 #PBS -l nodes=1:ppn=12
 #PBS -M taolue.yang@temple.edu
 #PBS -o /home/tus53997/Benchmark_DNACompression/logs/logs/job_input1_0_1_output.log
 #PBS -e /home/tus53997/Benchmark_DNACompression/logs/logs/job_input1_0_1_error.log
-#PBS -W depend=afterok:70408
+#PBS -W depend=afterok:70940
 
 
 
 cd $PBS_O_WORKDIR
 module load singularity
-singularity exec --bind /home/tus53997:/mnt /home/tus53997/sz3_perf_amd.sif /home/tus53997/Benchmark_DNACompression/ExternalDependencies/fqzcomp/fqzcomp -d /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/ERR103405_1.fastq_-Q_5.fqz /home/tus53997/Benchmark_DNACompression/Scripts/../DecompressedOutput/ERR103405_1.fastq_-Q_5_decompressed.fastq
+singularity exec --bind /home/tus53997:/mnt /home/tus53997/sz3_perf_amd.sif /home/tus53997/Benchmark_DNACompression/ExternalDependencies/SZ3/bin/sz3 -f -1 5126799450 -M REL 0.8 -z /home/tus53997/Benchmark_DNACompression/Scripts/../CompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin_-f_-1_5126799450_-M_REL_0.8.sz -o /home/tus53997/Benchmark_DNACompression/Scripts/../DecompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin_-f_-1_5126799450_-M_REL_0.8_decompressed.sz.out
 
 source /home/tus53997/miniconda3/bin/activate compression
+
+python -c "import sys; sys.path.append('/home/tus53997/Benchmark_DNACompression/Scripts'); from SZ3_Decompress_Assembler import reconstruct_fastq; reconstruct_fastq('/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/dna_bases1.fastq',
+        '/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/base_identifiers1.fastq',
+        '/home/tus53997/Benchmark_DNACompression/Fastq/Individual_fields/quality_identifiers1.fastq',
+        '/home/tus53997/Benchmark_DNACompression/CompressedOutput/../DecompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin_-f_-1_5126799450_-M_REL_0.8_decompressed.sz.out',
+        '/home/tus53997/Benchmark_DNACompression/CompressedOutput/../DecompressedOutput/HG00097_CCAAGTCT-AAGGATGA_HCLHLDSXX_L004_001.R2.bin_-f_-1_5126799450_-M_REL_0.8_decompressed.sz.out.fastq',
+        max_quality_char='F')"
 
 conda deactivate

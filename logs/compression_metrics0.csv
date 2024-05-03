@@ -1,12 +1,5 @@
 job_id,Compressor Name,Time (seconds),Ratio
-job_input0_0_0,fqzcomp-Q 5,3,9.43
-job_input0_1_0,fqzcomp-Q 10,4,10.49
-job_input0_2_0,fqzcomp-Q 2,3,7.71
-job_input0_6_0,spring-c -l -q ill_bin,3,6.86
-job_input0_7_0,SZ3-f -1 63866600 -M REL 0.1,5,5.96
-job_input0_8_0,SZ3-f -1 63866600 -M REL 0.2,4,6.40
-job_input0_9_0,SZ3-f -1 63866600 -M ABS 0.1,4,6.09
-job_input0_10_0,SZ3-f -1 63866600 -M ABS 0.2,5,6.46
-job_input0_3_0,spring-c -l -q qvz 0.6,217,8.64
-job_input0_4_0,spring-c -l -q qvz 0.8,225,7.60
-job_input0_5_0,spring-c -l -q qvz 1,229,7.02
+job_input0_1_0,fqzcomp-Q 5,263,8.90
+job_input0_0_0,SZ3-f -1 5126799450 -M REL 0.8,350,7.45
+job_input0_3_0,spring-c -l -q ill_bin,196,8.40
+job_input0_2_0,spring-c -l -q qvz 1,20484,8.34

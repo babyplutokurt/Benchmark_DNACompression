@@ -1,47 +1,47 @@
 ----------------------------------------
-Begin Batch Job Prologue Thu Apr 11 20:49:57 EDT 2024
-Job ID:           70392
+Begin Batch Job Prologue Fri May  3 04:51:13 EDT 2024
+Job ID:           70938
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_3_0
-Resources List:   walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources List:   walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
 Queue:            compute
 Account:          
-Nodes:            c08 
+Nodes:            c07 
 ----------------------------------------
-End Batch Job Prologue Thu Apr 11 20:49:57 EDT 2024
+End Batch Job Prologue Fri May  3 04:51:13 EDT 2024
 ----------------------------------------
-Temporary directory: ./tmp.fa37JncCHr/
+Temporary directory: ./tmp.yDsbzayy4c/
 Long flag detected.
 Starting compression...
 Preprocessing ...
-Max Read length: 152
-Total number of reads: 420175
+Max Read length: 150
+Total number of reads: 34178663
 Preprocessing done!
-Time for this step: 216 s
-Temporary directory size: 19827424
+Time for this step: 184 s
+Temporary directory size: 1483472361
 
 Sizes of streams after compression: 
-Reads:          14724888 bytes
-Quality:         4229560 bytes
-ID:               872976 bytes
+Reads:        1192289152 bytes
+Quality:       221784894 bytes
+ID:             69398315 bytes
 Creating tar archive ...Tar archive done!
-Time for this step: 0 s
+Time for this step: 6 s
 Compression done!
-Total time for compression: 216 s
+Total time for compression: 191 s
 
-Total size:     19978240 bytes
+Total size:   1494599680 bytes
 ----------------------------------------
-Begin Batch Job Epilogue Thu Apr 11 20:53:35 EDT 2024
-Job ID:           70392
+Begin Batch Job Epilogue Fri May  3 04:54:30 EDT 2024
+Job ID:           70938
 Username:         tus53997
 Group:            cis
 Job Name:         job_input0_3_0
-Session:          140637
-Limits:           walltime=01:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
-Resources:        cput=00:23:54,vmem=2460224kb,walltime=00:03:38,mem=1457624kb,energy_used=0
+Session:          69242
+Limits:           walltime=168:00:00,nodes=1:ppn=12,neednodes=1:ppn=12
+Resources:        cput=00:19:43,vmem=1507600kb,walltime=00:03:17,mem=136964kb,energy_used=0
 Queue:            compute
 Account:          
 ----------------------------------------
-End Batch Job Epilogue Thu Apr 11 20:53:45 EDT 2024
+End Batch Job Epilogue Fri May  3 04:54:40 EDT 2024
 ----------------------------------------
